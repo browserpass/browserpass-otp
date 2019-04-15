@@ -1,0 +1,14 @@
+{
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzCCoXUbvVtAC6rN7QNTLIQ/ThQWBcp9TgeS0HOcpkUxOypD0fyJDMv2U3c6yuCwIqmBa+LwDncLbSyhb788N6hc4+01QWKzQa9qjpAWKHTx1erKxs8+OjbdTxJBgfKI9s9hVUuBTeNBv4PoC1pv3F2wk0HyZct63GcMCikZMMri/3/HRXTPAsT+ROxwrohsyZLSg4FptrNYPQb/7XpPS1+eHOqzNqv0Zhh6/gJSJ5gML6tKjudjnhF0pi6weKbvkIlf9g2nT/Wo8iarimJX49ENqpSuqP+BFpspoptwyIqfUmi3NQZXDOXkyg9DYQvXjU4+yrVmJs7XpzU9RdNDe9wIDAQAB",
+    "manifest_version": 2,
+    "name": "Browserpass OTP",
+    "description": "OTP extension for browserpass",
+    "version": "3.0.0",
+    "author": "Maxim Baz <browserpass@maximbaz.com>, Steve Gilberd <steve@erayd.net>",
+    "homepage_url": "https://github.com/browserpass/browserpass-otp",
+    "background": {
+        "persistent": true,
+        "scripts": ["js/background.dist.js"]
+    },
+    "permissions": ["clipboardWrite"]
+}

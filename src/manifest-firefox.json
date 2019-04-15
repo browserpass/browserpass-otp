@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "name": "Browserpass OTP",
+    "description": "OTP extension for browserpass",
+    "version": "3.0.0",
+    "author": "Maxim Baz <browserpass@maximbaz.com>, Steve Gilberd <steve@erayd.net>",
+    "homepage_url": "https://github.com/browserpass/browserpass-otp",
+    "background": {
+        "persistent": true,
+        "scripts": ["js/background.dist.js"]
+    },
+    "applications": {
+        "gecko": {
+            "id": "browserpass-otp@maximbaz.com",
+            "strict_min_version": "50.0"
+        }
+    },
+    "permissions": ["clipboardWrite"]
+}
