@@ -62,7 +62,9 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender) {
 });
 
 /**
- * Gemerate a TOTP code
+ * Generate a TOTP code
+ *
+ * @since 3.0.0
  *
  * @return string Generated code
  */
