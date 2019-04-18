@@ -5,6 +5,7 @@
 //require("chrome-extension-async");
 var m = require("mithril");
 var token = null;
+var progress = null;
 
 // interface definition
 var display = {
@@ -22,6 +23,21 @@ var display = {
                     })
                 ])
             );
+            if (progress !== null) {
+                let updateProgress = vnode => {
+                    vnode.dom.style.transition = "none";
+                    vnode.dom.style.width = `${(progress.refresh / progress.period) * 100}%`;
+                    setTimeout(function() {
+                        vnode.dom.style.transition = `width linear ${progress.refresh}s`;
+                        vnode.dom.style.width = "0%";
+                    }, 100);
+                };
+                let progressNode = m("div.progress", {
+                    oncreate: updateProgress,
+                    onupdate: updateProgress
+                });
+                nodes.push(progressNode);
+            }
         } else {
             nodes.push(m("div.info", "No token available"));
         }
@@ -88,10 +104,14 @@ function dispatchRequest() {
         };
         // request new token
         chrome.runtime.sendMessage(request, response => {
-            updateToken(response.token);
             if (response.hasOwnProperty("refresh")) {
                 setTimeout(dispatchRequest, response.refresh * 1000);
+                progress = {
+                    refresh: response.refresh,
+                    period: response.period
+                };
             }
+            updateToken(response.token);
         });
 
         return true;

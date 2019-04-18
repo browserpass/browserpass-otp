@@ -99,6 +99,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 if (otp.type == "totp") {
                     // refresh after this many seconds
                     response.refresh = otp.period - (Math.floor(Date.now() / 1000) % otp.period);
+                    response.period = otp.period;
                 }
                 sendResponse(response);
             } else {
