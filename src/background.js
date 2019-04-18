@@ -1,3 +1,5 @@
+//------------------------------------- Initialisation --------------------------------------//
+
 "use strict";
 
 require("chrome-extension-async");
@@ -10,6 +12,9 @@ const validSenders = [
     "klfoddkbhleoaabpmiigbmpbjfljimgb",
     "browserpass@maximbaz.com"
 ];
+
+// instance registry
+var registry = {};
 
 // Main entry point, invoked from browserpass. No response is expected.
 chrome.runtime.onMessageExternal.addListener(function(request, sender) {
@@ -68,11 +73,50 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender) {
         console.log(`Unsupported OTP type: ${otp.type}`);
     }
 
+    // update registry
+    registry[request.settings.tab.id] = {
+        otp: otp,
+        host: request.settings.host
+    };
+
     // copy to clipboard
+    // TODO only do this automatically when option is enabled
     if (!request.action.match(/^copy[A-Z]*/)) {
         copyToClipboard(otp.generate());
     }
 });
+
+// popup entry point
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    switch (request.action) {
+        case "getToken":
+            if (
+                registry.hasOwnProperty(request.tabID) &&
+                registry[request.tabID].host === request.host
+            ) {
+                let otp = registry[request.tabID].otp;
+                let response = { token: otp.generate() };
+                if (otp.type == "totp") {
+                    // refresh after this many seconds
+                    response.refresh = otp.period - (Math.floor(Date.now() / 1000) % otp.period);
+                    response.period = otp.period;
+                }
+                sendResponse(response);
+            } else {
+                sendResponse({ token: null });
+            }
+            break;
+        default:
+            throw new Error(`Unknown action: ${request.action}`);
+    }
+});
+
+// clean up stale registry entries
+chrome.tabs.onRemoved.addListener(tabID => {
+    delete registry[tabID];
+});
+
+//----------------------------------- Function definitions ----------------------------------//
 
 /**
  * Generate a TOTP code
