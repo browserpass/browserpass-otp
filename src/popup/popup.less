@@ -1,0 +1,38 @@
+body {
+    display: flex;
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px;
+}
+
+.outline {
+    display: flex;
+    align-items: center;
+    outline: 1px solid #7f7f7f;
+    padding: 3px 4px;
+    transition: background-color 0.5s ease-out, outline 0.5s ease-out;
+
+    &.copied {
+        background-color: #d0ebff;
+        outline: 1px solid #1c7ed6;
+        transition: none;
+    }
+}
+
+.token {
+    border: none;
+    text-align: center;
+}
+
+.copy {
+    background: url("../popup/copy.svg") no-repeat;
+    background-size: cover;
+    height: 14px;
+    margin-left: 4px;
+    width: 14px;
+}
+
+.info {
+    white-space: nowrap;
+}

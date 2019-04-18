@@ -10,5 +10,8 @@
         "persistent": true,
         "scripts": ["js/background.dist.js"]
     },
-    "permissions": ["clipboardWrite"]
+    "browser_action": {
+        "default_popup": "popup/popup.html"
+    },
+    "permissions": ["activeTab", "clipboardWrite"]
 }
