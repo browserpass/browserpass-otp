@@ -18,6 +18,17 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender) {
         return;
     }
 
+    // hydrate request
+    if (!request.hasOwnProperty("version")) {
+        // REMOVE this block once browserpass-extension-3.1 is fully deployed in prod.
+        request.version = "3.0.12";
+        request.action = "noop";
+    }
+    request.version = (version => {
+        var [major, minor, patch] = version.split(".");
+        return parseInt(major) * 1000000 + parseInt(minor) * 1000 + parseInt(patch);
+    })(request.version);
+
     // parse OTP object
     if (request.otp.key === null) {
         // this is an OTP URI, so extract the pieces
@@ -57,8 +68,10 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender) {
         console.log(`Unsupported OTP type: ${otp.type}`);
     }
 
-    // generate code
-    copyToClipboard(otp.generate());
+    // copy to clipboard
+    if (!request.action.match(/^copy[A-Z]*/)) {
+        copyToClipboard(otp.generate());
+    }
 });
 
 /**
