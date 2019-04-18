@@ -104,7 +104,7 @@ function dispatchRequest() {
  * @param string newToken New token data
  * @since 3.0.0
  */
-function updateToken(newToken, period = null) {
+function updateToken(newToken) {
     token = newToken;
     m.redraw();
 }
