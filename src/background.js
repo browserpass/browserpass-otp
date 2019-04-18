@@ -74,9 +74,9 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender) {
     }
 
     // update registry
-    registry[request.tab.id] = {
+    registry[request.settings.tab.id] = {
         otp: otp,
-        host: request.host
+        host: request.settings.host
     };
 
     // copy to clipboard
