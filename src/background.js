@@ -67,8 +67,10 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender) {
         console.log(`Unsupported OTP type: ${otp.type}`);
     }
 
-    // generate code
-    copyToClipboard(otp.generate());
+    // copy to clipboard
+    if (!request.action.match(/^copy[A-Z]*/)) {
+        copyToClipboard(otp.generate());
+    }
 });
 
 /**
