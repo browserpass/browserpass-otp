@@ -25,8 +25,9 @@ var display = {
             );
             if (progress !== null) {
                 let updateProgress = vnode => {
+                    let refresh = progress.refresh - (Date.now() - progress.begin) / 1000;
                     vnode.dom.style.transition = "none";
-                    vnode.dom.style.width = `${(progress.refresh / progress.period) * 100}%`;
+                    vnode.dom.style.width = `${(refresh / progress.period) * 100}%`;
                     setTimeout(function() {
                         vnode.dom.style.transition = `width linear ${progress.refresh}s`;
                         vnode.dom.style.width = "0%";
@@ -108,7 +109,8 @@ function dispatchRequest() {
                 setTimeout(dispatchRequest, response.refresh * 1000);
                 progress = {
                     refresh: response.refresh,
-                    period: response.period
+                    period: response.period,
+                    begin: Date.now()
                 };
             }
             updateToken(response.token);
