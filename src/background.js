@@ -20,6 +20,7 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender) {
 
     // hydrate request
     if (!request.hasOwnProperty("version")) {
+        // REMOVE this block once browserpass-extension-3.1 is fully deployed in prod.
         request.version = "3.0.12";
         request.action = "noop";
     }
