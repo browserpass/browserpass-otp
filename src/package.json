@@ -1,6 +1,6 @@
 {
     "name": "browserpass-otp",
-    "version": "0.2.0-dev",
+    "version": "0.2.1-dev",
     "description": "OTP extension for browserpass.",
     "homepage": "https://github.com/browserpass/browserpass-otp",
     "license": "ISC",
