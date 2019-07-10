@@ -10,6 +10,9 @@
         "persistent": true,
         "scripts": ["js/background.dist.js"]
     },
+    "icons": {
+        "128": "icon.png"
+    },
     "browser_action": {
         "default_popup": "popup/popup.html"
     },
