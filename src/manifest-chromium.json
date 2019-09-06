@@ -11,7 +11,8 @@
         "scripts": ["js/background.dist.js"]
     },
     "icons": {
-        "128": "icon.png"
+        "128": "icon.png",
+        "16": "icon-16.png"
     },
     "browser_action": {
         "default_popup": "popup/popup.html"
