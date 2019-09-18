@@ -14,14 +14,15 @@ var display = {
 
         if (token !== null) {
             nodes.push(
-                m("div.outline", [
-                    m("div.token", token),
-                    m("div.copy", {
+                m(
+                    "div.outline",
+                    {
                         onclick: function() {
                             copyToClipboard(token);
                         }
-                    })
-                ])
+                    },
+                    [m("div.token", token), m("div.copy")]
+                )
             );
             if (progress !== null) {
                 let updateProgress = vnode => {
