@@ -17,14 +17,11 @@ var display = {
                 m(
                     "div.outline",
                     {
-                        onclick: function () {
+                        onclick: function() {
                             copyToClipboard(token);
                         }
                     },
-                    [
-                        m("div.token", token),
-                        m("div.copy")
-                    ]
+                    [m("div.token", token), m("div.copy")]
                 )
             );
             if (progress !== null) {
