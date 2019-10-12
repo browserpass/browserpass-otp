@@ -102,6 +102,7 @@ function dispatchRequest() {
         var request = {
             action: "getToken",
             tabID: tabs[0].id,
+            origin: new URL(tabs[0].url).origin,
             host: new URL(tabs[0].url).hostname
         };
         // request new token
