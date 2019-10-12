@@ -76,6 +76,7 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender) {
     // update registry
     registry[request.settings.tab.id] = {
         otp: otp,
+        origin: request.settings.origin,
         host: request.settings.host
     };
 
@@ -92,7 +93,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         case "getToken":
             if (
                 registry.hasOwnProperty(request.tabID) &&
-                registry[request.tabID].host === request.host
+                (registry[request.tabID].origin
+                    ? registry[request.tabID].origin === request.origin
+                    : registry[request.tabID].host === request.host)
             ) {
                 let otp = registry[request.tabID].otp;
                 let response = { token: otp.generate() };
