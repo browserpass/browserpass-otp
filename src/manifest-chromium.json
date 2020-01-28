@@ -11,6 +11,7 @@
         "scripts": ["js/background.dist.js"]
     },
     "icons": {
+        "16": "icon16.png",
         "128": "icon.png"
     },
     "browser_action": {
