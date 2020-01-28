@@ -3,7 +3,7 @@
     "manifest_version": 2,
     "name": "Browserpass OTP",
     "description": "OTP extension for browserpass",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "author": "Maxim Baz <browserpass@maximbaz.com>, Steve Gilberd <steve@erayd.net>",
     "homepage_url": "https://github.com/browserpass/browserpass-otp",
     "background": {
