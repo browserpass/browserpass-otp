@@ -44,6 +44,13 @@ var display = {
             nodes.push(m("div.info", "No token available"));
         }
 
+        nodes.push(
+            m(
+                "div.notice",
+                "From Browserpass v3.7.0, OTP functionality will move into the main Browserpass extension. It's disabled by default; enable it via the Browserpass options screen."
+            )
+        );
+
         return nodes;
     }
 };
